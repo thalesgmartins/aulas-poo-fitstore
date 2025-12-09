@@ -36,7 +36,7 @@ public class PedidoService {
         itens.pedido = pedido;
         itens.produto = Produto.findById(pedidoPayload.idProduto());
         itens.quantidade = pedidoPayload.quantidade();
-        itens.valor_unitario = new BigDecimal(0);
+        itens.valor_unitario = itens.produto.preco;
 
         pedido.persist();
         itens.persist();
