@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -30,7 +31,7 @@ public class Usuario extends PanacheEntity {
     public String email;
 
     @Column(name = "data_cadastro")
-    public Date dataCadastro;
+    public LocalDate dataCadastro;
 
     public boolean ativo;
     public String senha;
