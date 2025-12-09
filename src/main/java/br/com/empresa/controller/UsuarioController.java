@@ -79,7 +79,7 @@ public class UsuarioController {
             if (loginOK) {
                 String token = Jwt.issuer(issuer)
                         .upn(newUsuario.email)
-                        .groups(Collections.singleton(usuario.perfil.toString()))
+                        .groups(Collections.singleton(newUsuario.perfil.toString()))
                         .sign();
 
                 NewCookie cookie = new NewCookie.Builder("jwt")
