@@ -34,6 +34,8 @@ public class Usuario extends PanacheEntity {
     public LocalDate dataCadastro;
 
     public boolean ativo;
+
+    @JsonIgnore
     public String senha;
 
     @Enumerated(EnumType.STRING)
