@@ -13,7 +13,7 @@ import java.util.Date;
 public class Usuario extends PanacheEntity {
 
     @Column(name = "nome_completo", length = 300)
-    public String nomeUsuario;
+    public String nomeCompleto;
 
     @Column(length = 500)
     public String endereco;
