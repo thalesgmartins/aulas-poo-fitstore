@@ -17,6 +17,7 @@ public class MarcaService {
         return Marca.findByIdOptional(id);
     }
 
+    @Transactional
     public Marca create(Marca marca) {
         marca.persist();
         return marca;

@@ -33,7 +33,6 @@ public class marcaController {
     }
 
     @POST
-    @Transactional
     public RestResponse<Marca> criar(Marca marca) {
         Marca novaMarca = marcaService.create(marca);
         return RestResponse.ResponseBuilder.ok(novaMarca).status(RestResponse.Status.CREATED).build();
