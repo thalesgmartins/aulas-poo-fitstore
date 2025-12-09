@@ -17,10 +17,7 @@ import jakarta.ws.rs.core.SecurityContext;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.resteasy.reactive.RestResponse;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Path("/usuarios")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -36,14 +33,14 @@ public class UsuarioController {
     private String issuer;
 
     @GET
-    @RolesAllowed({"Administrador"})
+    @RolesAllowed({"ADMINISTRADOR"})
     public RestResponse<List<Usuario>> listarTodos() {
         return RestResponse.ResponseBuilder.ok(usuarioService.listarTodos()).build();
     }
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed({"Administrador"})
+    @RolesAllowed({"ADMINISTRADOR"})
     public RestResponse<?> desativar(@PathParam("id") Long id) {
         usuarioService.desativar(id);
         return RestResponse.noContent();
@@ -51,13 +48,13 @@ public class UsuarioController {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed({"Administrador", "Cliente"})
+    @RolesAllowed({"ADMINISTRADOR", "CLIENTE"})
     public UsuarioDetalhes detalhar(@PathParam("id") Long id) {
         return usuarioService.detalhar(id);
     }
 
     @PUT
-    @RolesAllowed({"Cliente"})
+    @RolesAllowed({"CLIENTE"})
     public RestResponse<?> editarUsuario(Usuario usuario) {
         usuarioService.editarUsuario(usuario);
         return RestResponse.ResponseBuilder.ok(usuario).build();
