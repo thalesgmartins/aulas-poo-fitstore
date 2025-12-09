@@ -1,9 +1,9 @@
 package br.com.empresa.model;
 
+import br.com.empresa.enums.PerfilUsuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -36,4 +36,7 @@ public class Usuario extends PanacheEntity {
     public boolean ativo;
     public String senha;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "perfil", nullable = false)
+    public PerfilUsuario perfil;
 }
