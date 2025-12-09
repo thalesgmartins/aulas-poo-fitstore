@@ -1,6 +1,7 @@
 package br.com.empresa.service;
 
 import br.com.empresa.UsuarioDetalhes;
+import br.com.empresa.enums.PerfilUsuario;
 import br.com.empresa.model.Usuario;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -16,6 +17,10 @@ public class UsuarioService {
     public Usuario create(Usuario usuario) {
         usuario.senha = BcryptUtil.bcryptHash(usuario.senha);
         usuario.dataCadastro = LocalDate.now();
+
+        if (usuario.perfil == null) {
+            usuario.perfil = PerfilUsuario.CLIENTE;
+        }
 
         Usuario.persist(usuario);
         return usuario;
