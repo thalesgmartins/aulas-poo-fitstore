@@ -38,6 +38,9 @@ public class PedidoService {
         itens.quantidade = pedidoPayload.quantidade();
         itens.valor_unitario = itens.produto.preco;
 
+        BigDecimal subtotalItem = itens.valor_unitario.multiply(itens.quantidade);
+        pedido.valor_total = pedido.valor_total.add(subtotalItem);
+
         pedido.persist();
         itens.persist();
     }
