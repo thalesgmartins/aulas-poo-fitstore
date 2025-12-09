@@ -35,10 +35,9 @@ public class Usuario extends PanacheEntity {
 
     public boolean ativo;
 
-    @JsonIgnore
     public String senha;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "perfil", nullable = false)
+    @Column(name = "perfil", nullable = false, length = 50)
     public PerfilUsuario perfil;
 }
