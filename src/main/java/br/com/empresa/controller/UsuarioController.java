@@ -114,4 +114,17 @@ public class UsuarioController {
         return RestResponse.ok(status);
     }
 
+    @POST
+    @Path("logout")
+    @RolesAllowed({"ADMINISTRADOR", "CLIENTE"})
+    public RestResponse<Object> logout() {
+        NewCookie expiredCookie = new NewCookie.Builder("jwt")
+                .value("") // Valor vazio
+                .path("/")
+                .httpOnly(true)
+                .maxAge(0)
+                .build();
+
+        return RestResponse.ResponseBuilder.noContent().cookie(expiredCookie).build();
+    }
 }
