@@ -59,7 +59,7 @@ public class ProdutoController {
 
     @GET
     @Path("/{id}/image")
-    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    @Produces("image/jpeg")
     public RestResponse<?> getImage(@PathParam("id") Long id) {
         return RestResponse.ResponseBuilder.ok(produtoService.buscarFotoProduto(id))
                 .header("Content-Disposition", "filename=produto.jpeg")
@@ -67,7 +67,7 @@ public class ProdutoController {
     }
 
     @POST
-    public RestResponse salvar(Produto produto) {
+    public RestResponse<Produto> salvar(Produto produto) {
         Produto newProduto = produtoService.save(produto);
         return RestResponse.ResponseBuilder.ok(newProduto).status(RestResponse.Status.CREATED).build();
     }
