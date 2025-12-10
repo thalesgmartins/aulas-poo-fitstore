@@ -94,4 +94,24 @@ public class UsuarioController {
         }
         return RestResponse.ResponseBuilder.notFound().build();
     }
+
+    @GET
+    @Path("/status")
+    @RolesAllowed({"ADMINISTRADOR", "CLIENTE"})
+    public RestResponse<Map<String, String>> status() {
+        // Só de executar a função o usuário já está logado.
+
+        // Pega o email
+        String email = securityContext.getUserPrincipal().getName();
+
+        // Pega o perfil com base no email
+        Usuario usuario = usuarioService.findByEmail(email);
+
+        Map<String, String> status = new HashMap<>();
+        status.put("logado", "true");
+        status.put("perfil", usuario.perfil.toString());
+
+        return RestResponse.ok(status);
+    }
+
 }
