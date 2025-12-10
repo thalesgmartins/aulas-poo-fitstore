@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  localstack:
+    container_name: localstack_fitstore
+    image: localstack/localstack
+    ports:
+      - "4566:4566"            # Gateway principal (S3, Lambda, etc)
+      - "4510-4559:4510-4559"  # Range de portas para serviços externos
+    environment:
+      - SERVICES=s3            # Ativa apenas o S3 (economiza memória)
+      - DEBUG=1                # Ajuda a ver logs de erro
+      - PERSISTENCE=1          # Salva os dados (buckets/arquivos) no disco
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "./volume-dados:/var/lib/localstack" # Onde os dados ficarão salvos no seu PC
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      # Script mágico: Cria o bucket automaticamente ao iniciar
+      - "./init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh"
